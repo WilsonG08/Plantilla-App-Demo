@@ -7,38 +7,40 @@ import Mensaje from '../componets/Alertas/Mensaje'
 
 
 
+
 export const Register = () => {
 
     const [mensaje, setMensaje] = useState({})
-const [form, setform] = useState({
-    nombre: "",
-    apellido: "",
-    direccion: "",
-    telefono: "",
-    email: "",
-    password: ""
-})
 
-const handleChange = (e) => {
-    setform({
-        ...form,
-        [e.target.name]: e.target.value
+    const [form, setform] = useState({
+        nombre: "",
+        apellido: "",
+        direccion: "",
+        telefono: "",
+        email: "",
+        password: ""
     })
-}
 
-const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-        const url = `${import.meta.env.VITE_BACKEND_URL}/registro`
-        //const url = "http://172.31.118.87:3000/api/registro"
-        const respuesta = await axios.post(url, form)
-        setMensaje({ respuesta: respuesta.data.msg, tipo: true })
-        setform({})
-    } catch (error) {
-        setMensaje({ respuesta: error.response?.data?.msg, tipo: false })
-        console.log(error)
+    const handleChange = (e) => {
+        setform({
+            ...form,
+            [e.target.name]: e.target.value
+        })
     }
-}
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        try {
+            const url = `${import.meta.env.VITE_BACKEND_URL}/registro`
+            //const url = "http://172.31.118.87:3000/api/registro"
+            const respuesta = await axios.post(url, form)
+            setMensaje({ respuesta: respuesta.data.msg, tipo: true })
+            setform({})
+        } catch (error) {
+            setMensaje({ respuesta: error.response?.data?.msg, tipo: false })
+            console.log(error)
+        }
+    }
 
 
     return (
