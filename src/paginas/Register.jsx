@@ -4,10 +4,6 @@ import axios from 'axios';
 import Mensaje from '../componets/Alertas/Mensaje'
 
 
-
-
-
-
 export const Register = () => {
 
     const [mensaje, setMensaje] = useState({})
@@ -31,9 +27,14 @@ export const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const url = `${import.meta.env.VITE_BACKEND_URL}/registro`
+            const url = `${import.meta.env.VITE_BACKEND_URL}/registro`;
+            console.log("URL : ",url)
+            //const url = `${import.meta.env.VITE_BACKEND_URL}/registro`
             //const url = "http://172.31.118.87:3000/api/registro"
+            //const url = http//localhost:3000/api/registro
+            //const url = "http://localhost:3000/api/registro"
             const respuesta = await axios.post(url, form)
+            console.log("respuestas : ", respuesta)
             setMensaje({ respuesta: respuesta.data.msg, tipo: true })
             setform({})
         } catch (error) {
@@ -50,6 +51,7 @@ export const Register = () => {
                     {Object.keys(mensaje).length > 0 && <Mensaje tipo={mensaje.tipo}>{mensaje.respuesta}</Mensaje>}
                     <h1 className="text-3xl font-semibold mb-2 text-center uppercase  text-gray-500">Welcome</h1>
                     <small className="text-gray-400 block my-4 text-sm">Please enter your details</small>
+                    
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label className="mb-2 block text-sm font-semibold" htmlFor="nombre">Nombre:</label>
